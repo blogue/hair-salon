@@ -128,6 +128,28 @@ namespace HairSalon.Objects
 
       return foundStylist;
     }
+    public void Update(string newName)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
 
+      SqlCommand cmd = new SqlCommand("UPDATE stylists SET name = @NewName OUTPUT INSERTED.name;", conn);
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewName";
+      newNameParameter.Value = newName;
+      cmd.Parameters.Add(newNameParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        _name = rdr.GetString(0);
+      }
+
+      if(rdr != null) rdr.Close();
+      if(conn != null) conn.Close();
+    }
   }
 }
