@@ -37,5 +37,29 @@ namespace HairSalon.Objects
       //Assert
       Assert.Equal(firstClient, secondClient);
     }
+    [Fact]
+    public void Client_SavesToDataBase()
+    {
+      //Arrange, Act
+      Client newClient = new Client("Samantha", 2);
+      newClient.Save();
+      string expectedResult = Client.GetAll()[0].GetName();
+      string actualResult = "Samantha";
+      //Assert
+      Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
+    public void Client_SaveClientWithId()
+    {
+      //Arrange
+      Client newClient = new Client("Johnny", 1);
+      //Act
+      newClient.Save();
+      int result = Client.GetAll()[0].GetId();
+      int expectedResult = newClient.GetId();
+      //Assert
+      Assert.Equal(result, expectedResult);
+    }
   }
 }
