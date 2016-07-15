@@ -10,6 +10,10 @@
     <h2>Other: Stylist details</h2>
     <h2>Other: Stylist details</h2>
   <a href="/stylist/edit/@Model.GetId()"><button type="button" name="button">Edit</button></a>
-  <a href="/stylist/delete/@Model.GetId()"><button type="button" name="button">Delete</button></a>
+  <form action="/stylist/delete/@Model.GetId()" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete</button>
+  </form>
+  <a href="/"><button type="button" name="button">Home</button></a>
   </body>
 </html>

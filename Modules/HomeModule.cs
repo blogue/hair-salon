@@ -37,6 +37,14 @@ namespace HairSalon.Objects
         selectedStylist.Update(Request.Form["name"]);
         return View["success.cshtml", selectedStylist];
       };
+      Delete["/stylist/delete/{id}"] = parameters => {
+        Stylist.Delete(parameters.id);
+        return View["success.cshtml"];
+      };
+      Get["/stylists/deleted"] = _ => {
+        Stylist.DeleteAll();
+        return View["success.cshtml"];
+      };
     }
   }
 }
