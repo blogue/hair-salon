@@ -50,6 +50,19 @@ namespace HairSalon.Objects
         newClient.Save();
         return View["success.cshtml", newClient];
       };
+      Get["/client/edit/{id}"] = parameters => {
+        Client selectedClient = Client.Find(parameters.id);
+        return View["edit_client.cshtml", selectedClient];
+      };
+      Patch["/client/edit/{id}"] = parameters => {
+        Client selectedClient = Client.Find(parameters.id);
+        selectedClient.Update(Request.Form["name"], Request.Form["stylistId"]);
+        return View["success.cshtml", selectedClient];
+      };
+      Delete["/client/delete/{id}"] = parameters => {
+        Client.Delete(parameters.id);
+        return View["success.cshtml"];
+      };
     }
   }
 }

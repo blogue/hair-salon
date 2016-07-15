@@ -10,7 +10,16 @@
     <ul>
       @foreach(var client in Model.GetAllClientsByStylist())
       {
-        <li>@client.GetName()</li>
+        <li>
+          <div class="client">
+            <h3>@client.GetName()</h3>
+            <a href="/client/edit/@client.GetId()"><button type="button" name="button">Edit</button></a>
+            <form action="/client/delete/@client.GetId()" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </li>
       }
     </ul>
     <form action="/stylist/new_client" method="post">
