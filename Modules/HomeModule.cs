@@ -25,8 +25,8 @@ namespace HairSalon.Objects
         return View["success.cshtml", newStylist];
       };
       Get["/stylist/{id}"] = parameters => {
-        Stylist foundStylist = Stylist.Find(parameters.id);
-        return View["view_stylist.cshtml", foundStylist];
+        Stylist selectedStylist = Stylist.Find(parameters.id);
+        return View["view_stylist.cshtml", selectedStylist];
       };
       Get["/stylist/edit/{id}"] = parameters => {
         Stylist selectedStylist = Stylist.Find(parameters.id);
@@ -44,6 +44,11 @@ namespace HairSalon.Objects
       Get["/stylists/deleted"] = _ => {
         Stylist.DeleteAll();
         return View["success.cshtml"];
+      };
+      Post["/stylist/new_client"] = _ => {
+        Client newClient = new Client(Request.Form["name"], Request.Form["stylistId"]);
+        newClient.Save();
+        return View["success.cshtml", newClient];
       };
     }
   }

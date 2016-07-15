@@ -86,5 +86,7 @@ namespace HairSalon.Objects
       Assert.Equal(expectedName, actualName);
       Assert.Equal(expectedStylistId, actualStylistId);
     }
+
+    
   }
 }
