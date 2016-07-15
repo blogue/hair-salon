@@ -8,9 +8,9 @@ namespace HairSalon
 {
   public class StylistTest : IDisposable
   {
-    public ToDoTest()
+    public HairSalonTest()
     {
-      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon;Integrated Security=SSPI;";
+      DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
     }
 
     public void Dispose()
