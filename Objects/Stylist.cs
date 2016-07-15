@@ -99,6 +99,22 @@ namespace HairSalon.Objects
       rdr = cmd.ExecuteReader();
     }
 
+    public static void Delete(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists WHERE id = @StylistId;", conn);
+
+      SqlParameter newIdParameter = new SqlParameter();
+      newIdParameter.ParameterName = "@StylistId";
+      newIdParameter.Value = id;
+      cmd.Parameters.Add(newIdParameter);
+
+      rdr = cmd.ExecuteReader();
+    }
+
     public static Stylist Find(int id)
     {
       SqlConnection conn = DB.Connection();

@@ -84,6 +84,16 @@ namespace HairSalon.Objects
       //Assert
       Assert.Equal(expectedName, actualName);
     }
-    
+    [Fact] public void Stylist_DeleteStylist()
+    {
+      //Arrange
+      Stylist newStylist = new Stylist("Johnny");
+      newStylist.Save();
+      //Act
+      Stylist.Delete(newStylist.GetId());
+      int result = Stylist.GetAll().Count;
+      //Assert
+      Assert.Equal(0, result);
+    }
   }
 }
