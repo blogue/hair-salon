@@ -5,6 +5,7 @@
     <title></title>
   </head>
   <body>
+    <h1>Hair Salon</h1>
     <h1>Name: @Model.GetName()</h1>
     <h2>Client List: </h2>
     <ul>
@@ -24,14 +25,14 @@
     </ul>
     <form action="/stylist/new_client" method="post">
       <label>New Client Name: </label>
-      <input type="text" name="name" value=""> <br>
+      <input type="text" name="name" value="" required> <br>
       <input type="hidden" name="stylistId" value="@Model.GetId()">
       <button type="submit" name="button">Add Client</button>
     </form>
-  <a href="/stylist/edit/@Model.GetId()"><button type="button" name="button">Edit</button></a>
+  <a href="/stylist/edit/@Model.GetId()"><button type="button" name="button">Edit Stylist Info</button></a>
   <form action="/stylist/delete/@Model.GetId()" method="post">
     <input type="hidden" name="_method" value="DELETE">
-    <button type="submit">Delete</button>
+    <button type="submit">Delete Stylist</button>
   </form>
   <a href="/"><button type="button" name="button">Home</button></a>
   </body>
