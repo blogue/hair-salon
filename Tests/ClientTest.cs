@@ -71,5 +71,20 @@ namespace HairSalon.Objects
       //Assert
       Assert.Equal(newClient, foundClient);
     }
+    [Fact] public void Client_Update()
+    {
+      //Arrange
+      Client newClient = new Client("Harry", 2);
+      newClient.Save();
+      string expectedName = "Johnny";
+      int expectedStylistId = 1;
+      //Act
+      newClient.Update("Johnny", 1);
+      string actualName = newClient.GetName();
+      int actualStylistId = newClient.GetStylistId();
+      //Assert
+      Assert.Equal(expectedName, actualName);
+      Assert.Equal(expectedStylistId, actualStylistId);
+    }
   }
 }
