@@ -95,5 +95,19 @@ namespace HairSalon.Objects
       //Assert
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Stylist_ReturnClientsByStylist()
+    {
+      //Arrange
+      Stylist testStylist = new Stylist("Michaelangelo");
+      testStylist.Save();
+      Client testClient = new Client("El Nutritaco", testStylist.GetId());
+      testClient.Save();
+      List<Client> expectedResult = new List<Client>{testClient};
+      //Act
+      List<Client> result = testStylist.GetAllClientsByStylist();
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
   }
 }

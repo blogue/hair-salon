@@ -51,6 +51,43 @@ namespace HairSalon.Objects
       return allStylists;
     }
 
+    public List<Client> GetAllClientsByStylist()
+    {
+      List<Client> allClients = new List<Client> {};
+
+      SqlConnection conn = DB.Connection();
+      SqlDataReader rdr = null;
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM clients WHERE stylist_id = @StylistId;", conn);
+
+      SqlParameter newStylistIdParameter = new SqlParameter();
+      newStylistIdParameter.ParameterName = "@StylistId";
+      newStylistIdParameter.Value = _id;
+      cmd.Parameters.Add(newStylistIdParameter);
+
+      rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int newId = rdr.GetInt32(0);
+        string newName = rdr.GetString(1);
+        int newStylistId = rdr.GetInt32(2);
+        Client newClient = new Client(newName, newStylistId, newId);
+        allClients.Add(newClient);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return allClients;
+    }
+
     public override bool Equals(System.Object otherStylist)
     {
       if (!(otherStylist is Stylist))
