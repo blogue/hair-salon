@@ -7,17 +7,17 @@ using System.Data.SqlClient;
 
 namespace HairSalon.Objects
 {
-  public class StylistTest
+  public class StylistTest : IDisposable
   {
     public StylistTest()
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
     }
 
-    // public void Dispose()
-    // {
-    //   Stylist.DeleteAll();
-    // }
+    public void Dispose()
+    {
+      Stylist.DeleteAll();
+    }
 
     [Fact]
     public void Stylist_DatabaseEmpty_0()
@@ -38,5 +38,16 @@ namespace HairSalon.Objects
       Assert.Equal(firstStylist, secondStylist);
     }
 
+    [Fact]
+    public void Stylist_SaveStylistToDatabase()
+    {
+      //Arrange, Act
+      Stylist testStylist = new Stylist("Johnny");
+      testStylist.Save();
+      Stylist savedStylist = Stylist.GetAll()[0];
+      //Assert
+      Assert.Equal(testStylist, savedStylist);
+
+    }
   }
 }

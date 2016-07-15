@@ -35,7 +35,7 @@ namespace HairSalon.Objects
 
       SqlCommand cmd = new SqlCommand("SELECT * FROM stylists;", conn);
       rdr = cmd.ExecuteReader();
-      
+
       while(rdr.Read())
       {
         int newStylistId = rdr.GetInt32(0);
@@ -64,6 +64,39 @@ namespace HairSalon.Objects
         bool stylistNameEquality = (_name == newStylist.GetName());
         return (stylistNameEquality && stylistIdEquality);
       }
+    }
+
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+
+      SqlCommand cmd = new SqlCommand("INSERT INTO stylists (name) OUTPUT INSERTED.id VALUES (@NewName)", conn);
+
+      SqlParameter newNameParameter = new SqlParameter();
+      newNameParameter.ParameterName = "@NewName";
+      newNameParameter.Value = _name;
+      cmd.Parameters.Add(newNameParameter);
+
+      rdr = cmd.ExecuteReader();
+      while(rdr.Read())
+      {
+        _id = rdr.GetInt32(0);
+      }
+
+      if (rdr != null) rdr.Close();
+      if (conn != null) conn.Close();
+    }
+
+    public static void DeleteAll()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+      SqlDataReader rdr = null;
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM stylists;", conn);
+      rdr = cmd.ExecuteReader();
     }
 
   }
