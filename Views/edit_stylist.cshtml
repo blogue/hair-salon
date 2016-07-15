@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Edit @Model.GetName()</h1>
+    <form action="/stylist/edit/@Model.GetId()" method="post">
+      <input type="hidden" name="_method" value="PATCH">
+      <label>Edit Name: </label>
+      <input type="text" name="name" value="@Model.GetName()">
+      <button type="submit" name="button">Submit</button>
+    </form>
+    <a href="/"><button type="button" name="button">Home</button></a>
+  </body>
+</html>

@@ -150,13 +150,18 @@ namespace HairSalon.Objects
       conn.Open();
       SqlDataReader rdr = null;
 
-      SqlCommand cmd = new SqlCommand("UPDATE stylists SET name = @NewName OUTPUT INSERTED.name;", conn);
+      SqlCommand cmd = new SqlCommand("UPDATE stylists SET name = @NewName OUTPUT INSERTED.name WHERE id = @StylistId;", conn);
 
       SqlParameter newNameParameter = new SqlParameter();
       newNameParameter.ParameterName = "@NewName";
       newNameParameter.Value = newName;
       cmd.Parameters.Add(newNameParameter);
 
+      SqlParameter idParameter = new SqlParameter();
+      idParameter.ParameterName = "@StylistId";
+      idParameter.Value = _id;
+      cmd.Parameters.Add(idParameter);
+      
       rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
