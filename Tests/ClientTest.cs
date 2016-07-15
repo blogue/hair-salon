@@ -61,5 +61,15 @@ namespace HairSalon.Objects
       //Assert
       Assert.Equal(result, expectedResult);
     }
+    [Fact] public void Client_FindClient()
+    {
+      //Arrange
+      Client newClient = new Client("Johnny", 2);
+      //Act
+      newClient.Save();
+      Client foundClient = Client.Find(newClient.GetId());
+      //Assert
+      Assert.Equal(newClient, foundClient);
+    }
   }
 }

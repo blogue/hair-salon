@@ -144,6 +144,7 @@ namespace HairSalon.Objects
 
       return foundStylist;
     }
+
     public void Update(string newName)
     {
       SqlConnection conn = DB.Connection();
@@ -161,7 +162,7 @@ namespace HairSalon.Objects
       idParameter.ParameterName = "@StylistId";
       idParameter.Value = _id;
       cmd.Parameters.Add(idParameter);
-      
+
       rdr = cmd.ExecuteReader();
 
       while(rdr.Read())
